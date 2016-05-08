@@ -7,7 +7,8 @@ var users = require('./routes/users');
 var app = express();
 
 var config = {
- viewEngine: 'jade',
+    app: app,
+    viewEngine: 'jade',
     routes: [
         { path: '/', method: 'showHome', provider: require('../modules/logic/home.js') },
         { path: '/do/dog', method: 'showDog', provider: require('../modules/logic/dog.js') },
@@ -16,15 +17,7 @@ var config = {
     ]
 }
 
-//load the routes dynamically
-loader.routes({
-    routes: [
-        { path: '/', method: 'showHome', provider: require('../modules/logic/home.js') },
-        { path: '/do/dog', method: 'showDog', provider: require('../modules/logic/dog.js') },
-        { path: '/do/cow', method: 'showCow', provider: require('../modules/logic/cow.js') },
-        { path: '/do/cat', method: 'showCat', provider: require('../modules/logic/cat.js') },
-    ]
-}, app);
+loader.init(config);
 
 
 
