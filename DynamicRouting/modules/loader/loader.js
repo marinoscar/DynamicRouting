@@ -55,7 +55,7 @@ var loader = {
 var middleware = {
     doSecurity: function (req, res, next) {
         var isValid = auth.authorize({
-            clientId: req.get('clientId'), signature: req.get('signature'), date: req.get('data')
+            clientId: req.get('clientId'), signature: req.get('signature'), date: req.get('ey-date')
         });
         if (!isValid) {
             var err = new Error('Provided invalid credentials');

@@ -1,9 +1,9 @@
 ﻿var cow = {
     cowRoute: function (req, res, next) {
-        res.send(cow.showcow());
+        res.send(cow.showCow());
     },
     showCow: function () {
-        return '<h1>I am a cow</h1>'
+        return 'Muu'
     }
 }
 

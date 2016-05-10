@@ -3,7 +3,7 @@
         res.send(dog.showDog());
     },
     showDog: function () {
-        return '<h1>I am a dog</h1>'
+        return 'Woof'
     }
 }
 

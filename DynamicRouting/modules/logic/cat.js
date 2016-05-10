@@ -3,7 +3,7 @@
         res.send(cat.showCat());
     },
     showCat: function (){
-        return '<h1>I am a cat</h1>'
+        return 'Miau'
     }
 }
 
