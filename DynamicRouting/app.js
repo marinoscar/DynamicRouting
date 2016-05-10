@@ -1,6 +1,5 @@
 ﻿var express = require('express');
 var loader = require('./modules/loader/loader.js');
-
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
@@ -10,29 +9,31 @@ var config = {
     app: app,
     viewEngine: 'hbs',
     apiRoute: '/api',
+    appDir: __dirname,
     routes: [
         {
-            path: '/', provider: require('./modules/logic/home.js'),
+            route: '/', 
+            provider: require('./modules/logic/home.js'),
             methods: [
-                { http: 'get', module: 'homeRoute', }
+                { path: '/', http: 'get', module: 'homeRoute', }
             ]
         },
         {
-            path: '/api/dog', provider: require('./modules/logic/dog.js'),
+            route: '/api/dog', provider: require('./modules/logic/dog.js'),
             methods: [
-                { http: 'get', module: 'dogRoute' }
+                { path: '/', http: 'get', module: 'dogRoute' }
             ]
         },
         {
-            path: '/api/cow', provider: require('./modules/logic/cow.js'),
+            route: '/api/cow', provider: require('./modules/logic/cow.js'),
             methods: [
-                {http: 'get', module: 'cowRoute'}
+                { path: '/', http: 'get', module: 'cowRoute'}
             ]
         },
         {
-            path: '/api/cat', provider: require('./modules/logic/cat.js'),
+            route: '/api/cat', provider: require('./modules/logic/cat.js'),
             methods: [
-                { http: 'get', module: 'catRoute' }
+                { path: '/', http: 'get', module: 'catRoute' }
             ]
         },
     ]

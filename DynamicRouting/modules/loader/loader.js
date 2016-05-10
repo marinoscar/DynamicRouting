@@ -1,7 +1,7 @@
 ﻿var _ = require('underscore');
+var path = require('path');
 var express = require('express');
 var auth = require('../security/authorization.js');
-var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -16,19 +16,21 @@ var loader = {
     },
     doStaticInit: function (config) {
         var app = config.app;
-        app.set('views', path.join(__dirname, 'views'));
+        app.set('views', path.join(config.appDir, 'views'));
         app.set('view engine', config.viewEngine);
         
         app.use(logger('dev'));
         app.use(bodyParser.json());
         app.use(bodyParser.urlencoded({ extended: false }));
         app.use(cookieParser());
-        app.use(require('stylus').middleware(path.join(__dirname, 'public')));
-        app.use(express.static(path.join(__dirname, 'public')));
+        app.use(require('stylus').middleware(path.join(config.appDir, 'public')));
+        app.use(express.static(path.join(config.appDir, 'public')));
     },
     setupSecurity: function (config) {
         var app = config.app;
-        app.all(config.apiRoute, middleware.doSecurity);
+        var router = express.Router();
+        app.use(config.apiRoute, router);
+        router.all('*', middleware.doSecurity);
     },
     doInvalidRoutes: function (config) {
         var app = config.app;
@@ -41,8 +43,10 @@ var loader = {
     routes: function (config) {
         var app = config.app;
         _.each(config.routes, function (r, i, l) {
+            var router = express.Router();
+            app.use(r.route, router)
             _.each(r.methods, function (m, i, l) {
-                app[m.http](r.path, r.provider[m.module]);
+                router[m.http](m.path, r.provider[m.module]);
             });
         });
     }
