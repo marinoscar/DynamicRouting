@@ -1,8 +1,6 @@
 ﻿var express = require('express');
 var loader = require('./modules/loader/loader.js');
-
 var app = express();
-
 var config = {
     app: app,
     viewEngine: 'hbs',
@@ -36,7 +34,6 @@ var config = {
         },
     ]
 }
-
 loader.init(config);
 
 // development error handler
