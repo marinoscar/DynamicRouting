@@ -1,7 +1,5 @@
 ﻿var express = require('express');
 var loader = require('./modules/loader/loader.js');
-var routes = require('./routes/index');
-var users = require('./routes/users');
 
 var app = express();
 
@@ -40,10 +38,6 @@ var config = {
 }
 
 loader.init(config);
-
-
-
-// error handlers
 
 // development error handler
 // will print stacktrace

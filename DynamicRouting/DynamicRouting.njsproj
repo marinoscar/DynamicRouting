@@ -39,8 +39,6 @@
     <Compile Include="modules\security\authorization.js" />
     <Compile Include="public\javascripts\jquery.js" />
     <Compile Include="public\javascripts\main.js" />
-    <Compile Include="routes\index.js" />
-    <Compile Include="routes\users.js" />
     <Compile Include="bin\www" />
     <Compile Include="test\authorization.js" />
     <Content Include="package.json" />
@@ -48,8 +46,6 @@
     <Content Include="README.md" />
     <Content Include="views\error.hbs" />
     <Content Include="views\home.hbs" />
-    <Content Include="views\index.jade" />
-    <Content Include="views\layout.jade" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\" />
@@ -62,7 +58,6 @@
     <Folder Include="public\images\" />
     <Folder Include="public\javascripts\" />
     <Folder Include="public\stylesheets\" />
-    <Folder Include="routes\" />
     <Folder Include="views\" />
   </ItemGroup>
   <!-- Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them. -->
