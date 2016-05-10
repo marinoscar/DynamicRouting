@@ -1,9 +1,9 @@
 ﻿var home = {
     homeRoute: function (req, res, next) {
-        res.send(cat.showHome());
+        res.send(this.showHome(res));
     },
-    showHome: function () {
-        return '<h1>Welcome</h1>'
+    showHome: function (res) {
+        res.render('home', { name: 'oscar' });
     }
 }
 

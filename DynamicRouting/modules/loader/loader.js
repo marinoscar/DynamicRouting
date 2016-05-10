@@ -1,5 +1,6 @@
 ﻿var _ = require('underscore');
-var auth = require('./modules/security/authorization.js');
+var express = require('express');
+var auth = require('../security/authorization.js');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -7,13 +8,13 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var loader = {
-    init: function (config){
+    init: function (config) {
         this.doStaticInit(config);
         this.setupSecurity(config);
         this.routes(config);
         this.doInvalidRoutes(config);
     },
-    doStaticInit: function (config){
+    doStaticInit: function (config) {
         var app = config.app;
         app.set('views', path.join(__dirname, 'views'));
         app.set('view engine', config.viewEngine);
@@ -25,11 +26,11 @@ var loader = {
         app.use(require('stylus').middleware(path.join(__dirname, 'public')));
         app.use(express.static(path.join(__dirname, 'public')));
     },
-    setupSecurity: function (config){
+    setupSecurity: function (config) {
         var app = config.app;
         app.all(config.apiRoute, middleware.doSecurity);
     },
-    doInvalidRoutes: function (config){
+    doInvalidRoutes: function (config) {
         var app = config.app;
         app.use(function (req, res, next) {
             var err = new Error('Not Found');
@@ -39,14 +40,16 @@ var loader = {
     },
     routes: function (config) {
         var app = config.app;
-        _.foreach(config.routes, function (e, i, l) { 
-            app.use(e.path, config.provider[e.method]);
+        _.each(config.routes, function (r, i, l) {
+            _.each(r.methods, function (m, i, l) {
+                app[m.http](r.path, r.provider[m.module]);
+            });
         });
     }
 }
 
 var middleware = {
-    doSecurity: function (req, res, next){
+    doSecurity: function (req, res, next) {
         var isValid = auth.authorize({
             clientId: req.get('clientId'), signature: req.get('signature'), date: req.get('data')
         });
@@ -61,4 +64,4 @@ var middleware = {
     }
 }
 
-module.exports.loader = loader;
+module.exports = loader;

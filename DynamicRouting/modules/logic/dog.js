@@ -1,5 +1,5 @@
 ﻿var dog = {
-    catRoute: function (req, res, next) {
+    dogRoute: function (req, res, next) {
         res.send(dog.showDog());
     },
     showDog: function () {
@@ -7,4 +7,4 @@
     }
 }
 
-module.exports = cat;
+module.exports = dog;

@@ -8,12 +8,33 @@ var app = express();
 
 var config = {
     app: app,
-    viewEngine: 'jade',
+    viewEngine: 'hbs',
+    apiRoute: '/api',
     routes: [
-        { path: '/', method: 'showHome', provider: require('../modules/logic/home.js') },
-        { path: '/do/dog', method: 'showDog', provider: require('../modules/logic/dog.js') },
-        { path: '/do/cow', method: 'showCow', provider: require('../modules/logic/cow.js') },
-        { path: '/do/cat', method: 'showCat', provider: require('../modules/logic/cat.js') },
+        {
+            path: '/', provider: require('./modules/logic/home.js'),
+            methods: [
+                { http: 'get', module: 'homeRoute', }
+            ]
+        },
+        {
+            path: '/api/dog', provider: require('./modules/logic/dog.js'),
+            methods: [
+                { http: 'get', module: 'dogRoute' }
+            ]
+        },
+        {
+            path: '/api/cow', provider: require('./modules/logic/cow.js'),
+            methods: [
+                {http: 'get', module: 'cowRoute'}
+            ]
+        },
+        {
+            path: '/api/cat', provider: require('./modules/logic/cat.js'),
+            methods: [
+                { http: 'get', module: 'catRoute' }
+            ]
+        },
     ]
 }
 

@@ -35,6 +35,7 @@
     <Compile Include="modules\logic\cat.js" />
     <Compile Include="modules\logic\cow.js" />
     <Compile Include="modules\logic\dog.js" />
+    <Compile Include="modules\logic\home.js" />
     <Compile Include="modules\security\authorization.js" />
     <Compile Include="routes\index.js" />
     <Compile Include="routes\users.js" />
